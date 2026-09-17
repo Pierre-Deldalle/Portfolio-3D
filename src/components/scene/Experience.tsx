@@ -1,42 +1,52 @@
 import { OrbitControls } from "@react-three/drei";
 import Desk from "./Desk";
+import CameraController from "./CameraController";
 
-export default function Experience() {
-  return (
-    <>
-      /* Lumière générale */
-      <ambientLight intensity={1.2} />
+type ExperienceProps = {
+started: boolean;
+onStart: () => void;
+};
 
-      /* Lumière principale */
-      <directionalLight
+export default function Experience({ onStart, started }: ExperienceProps) {
+return (
+<>
+    {/* Lumière générale */}
+    <ambientLight intensity={1.2} />
+
+    {/* Lumière principale */}
+    <directionalLight
         position={[4, 6, 4]}
         intensity={2}
         castShadow
-      />
+        shadow-bias={-0.0005}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+    />
 
-      /* Bureau */
-      <Desk />
+    {/* Bureau */}
+    <Desk onClick={onStart} />
 
     {/* Sol */}
     <mesh
-    rotation={[-Math.PI / 2, 0, 0]}
-    position={[0, -1, -1.5]}
-    receiveShadow
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, -1, -1.5]}
+        receiveShadow
     >
-    <planeGeometry args={[5, 3]} />
-    <meshStandardMaterial color="#d9d4cc" />
+        <planeGeometry args={[5, 3]} />
+        <meshStandardMaterial color="#d9d4cc" />
     </mesh>
 
     {/* Mur */}
     <mesh
-    position={[0, 0.5, -3]}
-    receiveShadow
+        position={[0, 0.5, -3]}
+        receiveShadow
     >
-    <planeGeometry args={[5, 3]} />
-    <meshStandardMaterial color="#e8e3db" />
+        <planeGeometry args={[5, 3]} />
+        <meshStandardMaterial color="#e8e3db" />
     </mesh>
 
-      <OrbitControls />
+    <CameraController started={started} />
+    <OrbitControls />
     </>
-  );
-}
+    );
+    }

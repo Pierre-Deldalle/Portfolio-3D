@@ -1,0 +1,158 @@
+    .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+
+    pointer-events: none;
+
+    font-family: Arial, sans-serif;
+    color: #242424;
+
+        opacity: 1;
+    transition: opacity 0.6s ease;
+    }
+
+    .intro--hidden {
+    opacity: 0;
+    pointer-events: none;
+    }
+    
+
+    /* ---------------- */
+    /* INFORMATIONS */
+    /* ---------------- */
+
+    .intro__info {
+    position: absolute;
+
+    top: 50%;
+    right: 8%;
+
+    transform: translateY(-50%);
+
+    width: 420px;
+    }
+
+    .intro__label {
+    margin: 0 0 18px;
+
+    font-size: 0.7rem;
+    letter-spacing: 0.35rem;
+
+    opacity: 0.5;
+    }
+
+    .intro__info h1 {
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 0.85;
+
+    letter-spacing: -0.2rem;
+    }
+
+    .intro__info h1 span {
+    font-weight: 300;
+    }
+
+    .intro__separator {
+    width: 50px;
+    height: 2px;
+
+    margin: 30px 0;
+
+    background: #242424;
+    }
+
+    .intro__job {
+    margin: 0 0 8px;
+
+    font-size: 1rem;
+    font-weight: 500;
+    }
+
+    .intro__studies {
+    margin: 0;
+
+    font-size: 0.85rem;
+
+    opacity: 0.55;
+    }
+
+
+    /* ---------------- */
+    /* EXPLORE */
+    /* ---------------- */
+
+    .intro__explore {
+    position: absolute;
+
+    bottom: 8%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 0.7rem;
+    letter-spacing: 0.15rem;
+
+    text-transform: uppercase;
+    }
+
+    .intro__explore {
+    animation: explorePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes explorePulse {
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+    }
+
+    /* ---------------- */
+    /* FOOTER */
+    /* ---------------- */
+
+    .intro__footer {
+    position: absolute;
+
+    bottom: 25px;
+    left: 30px;
+    right: 30px;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 0.7rem;
+
+    opacity: 0.6;
+    }
+
+    .intro__footer button {
+    pointer-events: auto;
+
+    border: none;
+    background: none;
+
+    color: inherit;
+
+    font: inherit;
+
+    cursor: pointer;
+
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    }
