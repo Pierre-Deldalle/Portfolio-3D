@@ -3,9 +3,12 @@ import { Canvas } from "@react-three/fiber";
 
 import Experience from "./scene/Experience";
 import Intro from "./ui/Intro";
+import Loader from "./ui/Loader";
+import Credits from "./ui/Credits";
 
 export default function Portfolio() {
   const [started, setStarted] = useState(false);
+  const [creditsOpen, setCreditsOpen] = useState(false);
 
   return (
     <>
@@ -22,7 +25,16 @@ export default function Portfolio() {
         />
       </Canvas>
 
-      <Intro started={started} />
+      <Intro
+        started={started}
+        onOpenCredits={() => setCreditsOpen(true)}
+      />
+
+      <Credits
+        isOpen={creditsOpen}
+        onClose={() => setCreditsOpen(false)}
+      />
+      <Loader />
     </>
   );
 }

@@ -1,0 +1,103 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  background: #f1f1f1;
+  color: #242424;
+
+  font-family: Arial, sans-serif;
+
+  opacity: 1;
+transition: opacity 0.8s ease;
+}
+
+.loader--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* PORTFOLIO • 2026 */
+.loader__top {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+
+  font-size: 0.7rem;
+  letter-spacing: 0.2rem;
+}
+
+/* Contenu central */
+.loader__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: min(500px, 80vw);
+
+  transform: translate(-50%, -50%);
+}
+
+/* PIERRE DELDALLE */
+.loader__name {
+  margin: 0 0 60px;
+
+  display: flex;
+  flex-direction: column;
+
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.15rem;
+
+  text-align: left;
+}
+
+.loader__name span {
+  font-weight: 300;
+}
+
+/* Zone chargement */
+.loader__loading {
+  width: 100%;
+}
+
+/* Texte + pourcentage */
+.loader__loading-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 12px;
+
+  font-size: 0.65rem;
+  letter-spacing: 0.15rem;
+
+  opacity: 0.5;
+}
+
+.loader__percentage {
+  margin: 0;
+
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Barre */
+.loader__bar {
+  width: 100%;
+  height: 1px;
+
+  background: rgba(36, 36, 36, 0.15);
+
+  overflow: hidden;
+}
+
+.loader__progress {
+  height: 100%;
+
+  background: #242424;
+
+  transition: width 0.15s ease;
+}

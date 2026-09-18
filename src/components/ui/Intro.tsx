@@ -2,9 +2,10 @@ import "./Intro.css";
 
 type IntroProps = {
   started: boolean;
+  onOpenCredits: () => void;
 };
 
-export default function Intro({ started }: IntroProps) {
+export default function Intro({ started, onOpenCredits }: IntroProps) {
   return (
     <div className={`intro ${started ? "intro--hidden" : ""}`}>
 
@@ -34,7 +35,8 @@ export default function Intro({ started }: IntroProps) {
       <footer className="intro__footer">
         <span>© 2026 Pierre Deldalle</span>
 
-        <button type="button">
+        <button type="button"
+        onClick={onOpenCredits}>
           Crédits
         </button>
       </footer>
