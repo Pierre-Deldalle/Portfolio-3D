@@ -16,7 +16,7 @@ export default function CameraController({
 
     gsap.to(camera.position, {
       x: 0,
-      y: 0.5,
+      y: 1,
       z: 2,
 
       duration: 2,

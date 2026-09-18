@@ -22,9 +22,9 @@ export default function Desk({ onClick }: DeskProps) {
   return (
     <primitive
       object={scene}
-      position={[0, -1.04, -2.43]}
+      position={[0, -1.04, -2.21]}
       rotation={[0, Math.PI, 0]}
-      scale={1}
+      scale={1.40}
 
       onClick={onClick}
 

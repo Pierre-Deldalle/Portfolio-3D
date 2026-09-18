@@ -46,6 +46,12 @@ export default function Credits({
             <p>
               Design, développement et intégration du portfolio.
             </p>
+
+            <h3>Antoine Deldalle</h3>
+
+            <p>
+              Aide 3D.  
+            </p>
           </section>
 
           <section>
@@ -73,13 +79,7 @@ export default function Credits({
               ASSETS 3D
             </span>
 
-            <h3>"Retro Office Setup"</h3>
-
-            <p>
-              Artiste : ILya Gamzayev
-              <br />
-              Source : <a className="credits__link" href="https://sketchfab.com/3d-models/90s-stylized-office-6dce10aa9372427daa06e3bd730cb8b3" target="_blank" rel="noopener noreferrer">Sketchfab</a>
-            </p>
+            <h3>Sketchfab</h3>
           </section>
 
         </div>

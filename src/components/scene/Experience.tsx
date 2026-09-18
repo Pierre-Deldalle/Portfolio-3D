@@ -1,6 +1,7 @@
 import { OrbitControls } from "@react-three/drei";
 import Desk from "./Desk";
 import CameraController from "./CameraController";
+import Chair from "./Chair";
 
 type ExperienceProps = {
 started: boolean;
@@ -26,6 +27,9 @@ return (
     {/* Bureau */}
     <Desk onClick={onStart} />
 
+    {/* Chaise */}
+    <Chair started={started} />
+
     {/* Sol */}
     <mesh
         rotation={[-Math.PI / 2, 0, 0]}
@@ -45,8 +49,24 @@ return (
         <meshStandardMaterial color="#e8e3db" />
     </mesh>
 
+    {/* Futur poster compétences */}
+    <mesh
+    position={[1.4, 1.4, -2.98]}
+    >
+    <planeGeometry args={[0.75, 1]} />
+    <meshStandardMaterial color="#3b5b92" />
+    </mesh>
+
+    {/* Futur poster décoratif */}
+    <mesh
+    position={[-1.7, 1.2, -2.98]}
+    >
+    <planeGeometry args={[1, 0.75]} />
+    <meshStandardMaterial color="#3b5b92" />
+    </mesh>
+
     <CameraController started={started} />
-    <OrbitControls />
+    <OrbitControls  target={[0, 0.7, 0]}/>
     </>
     );
     }
