@@ -1,32 +1,47 @@
-# React + TypeScript + Vite
+# 🖥️ Portfolio 3D
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Portfolio interactif développé pour présenter mes projets, mes compétences et mon parcours à travers une expérience 3D.
 
-Currently, two official plugins are available:
+Le site repose sur une scène interactive représentant un bureau, dans laquelle différents éléments permettent d'accéder aux différentes sections du portfolio.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Fonctionnalités
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🖥️ Scène 3D interactive
+- 🖱️ Éléments cliquables dans la scène
+- 📂 Présentation des projets
+- 🧠 Présentation des compétences
+- 🎓 Présentation du parcours
+- 🎨 Interface et environnement personnalisés
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## 🛠️ Technologies
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+### Frontend
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+- React
+- TypeScript
+- Three.js
+- React Three Fiber
+- React Three Drei
+- GSAP
+- CSS
+- Vite
+
+---
+
+## 🎯 Concept
+
+L'objectif du projet est de proposer un portfolio différent d'un site classique.
+
+La navigation s'effectue directement à travers une scène 3D : certains objets du bureau représentent différentes parties de mon profil, comme mes projets, mes compétences, mon parcours ou mes centres d'intérêt.
+
+---
+
+## 👨‍💻 Développement
+
+Projet personnel développé par **Pierre Deldalle** dans le cadre de la création de mon portfolio.
+
+*Le projet est actuellement en développement.*
