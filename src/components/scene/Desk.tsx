@@ -9,19 +9,23 @@ type DeskProps = {
 };
 
 export default function Desk({ onClick }: DeskProps) {
+
+  // Charge le modèle 3D complet du bureau
   const { scene } = useGLTF("/models/desk.glb");
 
   useEffect(() => {
-    /* Permet d'afficher les ombres des objets 3D */
+
+    // Parcourt tous les objets du modèle pour activer leurs ombres
     scene.traverse((object) => {
       if (object instanceof THREE.Mesh) {
         object.castShadow = true;
         object.receiveShadow = true;
       }
     });
+
   }, [scene]);
 
-  /* Remonte les parents jusqu'à trouver l'objet BALLON */
+  // Remonte les parents de l'objet survolé jusqu'à trouver le BALLON
   const findBasketball = (object: THREE.Object3D) => {
     let current: THREE.Object3D | null = object;
 
@@ -38,17 +42,22 @@ export default function Desk({ onClick }: DeskProps) {
 
   return (
     <>
+
+      {/* Affiche le modèle 3D complet du bureau */}
       <primitive
         object={scene}
         position={[0, -1.04, -2.21]}
         rotation={[0, Math.PI, 0]}
         scale={1.40}
 
+        // Démarre l'expérience lorsque l'utilisateur clique sur le bureau
         onClick={onClick}
 
+        // Détecte le passage de la souris sur un objet du bureau
         onPointerOver={(event: ThreeEvent<PointerEvent>) => {
           const basketball = findBasketball(event.object);
 
+          // Si l'objet survolé appartient au ballon, lance son animation
           if (basketball) {
             console.log("🏀 Hover ballon");
 
@@ -57,9 +66,11 @@ export default function Desk({ onClick }: DeskProps) {
           }
         }}
 
+        // Détecte lorsque la souris quitte un objet du bureau
         onPointerOut={(event: ThreeEvent<PointerEvent>) => {
           const basketball = findBasketball(event.object);
 
+          // Si la souris quitte le ballon, lance son animation de retour
           if (basketball) {
             console.log("🏀 Sortie ballon");
 
@@ -69,9 +80,12 @@ export default function Desk({ onClick }: DeskProps) {
         }}
       />
 
+      {/* Ajoute les interactions et animations du ballon */}
       <Basketball scene={scene} />
+
     </>
   );
 }
 
+// Précharge le modèle du bureau pour éviter un chargement au moment de son affichage
 useGLTF.preload("/models/desk.glb");

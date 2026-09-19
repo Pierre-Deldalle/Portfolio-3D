@@ -9,7 +9,7 @@
   font-family: Arial, sans-serif;
 
   opacity: 1;
-transition: opacity 0.8s ease;
+  transition: opacity 0.8s ease;
 }
 
 .loader--hidden {
@@ -17,7 +17,9 @@ transition: opacity 0.8s ease;
   pointer-events: none;
 }
 
-/* PORTFOLIO • 2026 */
+
+/* TITRE */
+
 .loader__top {
   position: absolute;
   top: 30px;
@@ -27,7 +29,9 @@ transition: opacity 0.8s ease;
   letter-spacing: 0.2rem;
 }
 
-/* Contenu central */
+
+/* CONTENU CENTRAL */
+
 .loader__center {
   position: absolute;
   top: 50%;
@@ -38,7 +42,6 @@ transition: opacity 0.8s ease;
   transform: translate(-50%, -50%);
 }
 
-/* PIERRE DELDALLE */
 .loader__name {
   margin: 0 0 60px;
 
@@ -57,12 +60,13 @@ transition: opacity 0.8s ease;
   font-weight: 300;
 }
 
-/* Zone chargement */
+
+/* CHARGEMENT */
+
 .loader__loading {
   width: 100%;
 }
 
-/* Texte + pourcentage */
 .loader__loading-info {
   display: flex;
   justify-content: space-between;
@@ -84,7 +88,6 @@ transition: opacity 0.8s ease;
   letter-spacing: 0;
 }
 
-/* Barre */
 .loader__bar {
   width: 100%;
   height: 1px;

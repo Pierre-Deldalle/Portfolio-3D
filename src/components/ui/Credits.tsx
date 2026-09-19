@@ -9,16 +9,23 @@ export default function Credits({
   isOpen,
   onClose,
 }: CreditsProps) {
+
+  // N'affiche pas les crédits si le panneau est fermé
   if (!isOpen) return null;
 
   return (
     <div className="credits">
+
+      {/* Fond permettant de fermer les crédits en cliquant à l'extérieur */}
       <div
         className="credits__overlay"
         onClick={onClose}
       />
 
+      {/* Panneau principal des crédits */}
       <div className="credits__panel">
+
+        {/* En-tête */}
         <div className="credits__header">
           <div>
             <span className="credits__label">PORTFOLIO • 2026</span>
@@ -34,8 +41,10 @@ export default function Credits({
           </button>
         </div>
 
+        {/* Contenu des crédits */}
         <div className="credits__content">
 
+          {/* Conception et développement */}
           <section>
             <span className="credits__category">
               CONCEPTION & DÉVELOPPEMENT
@@ -54,6 +63,7 @@ export default function Credits({
             </p>
           </section>
 
+          {/* Technologies utilisées */}
           <section>
             <span className="credits__category">
               TECHNOLOGIES
@@ -74,6 +84,7 @@ export default function Credits({
             </p>
           </section>
 
+          {/* Sources des modèles 3D */}
           <section>
             <span className="credits__category">
               ASSETS 3D
