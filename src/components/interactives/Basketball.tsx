@@ -24,12 +24,16 @@ export default function Basketball({ scene }: BasketballProps) {
     // Sauvegarde la rotation d'origine du ballon
     const startRotationZ = basketball.rotation.z;
 
+    // Sauvegarde la hauteur d'origine du ballon
+    const startY = basketball.position.y;
+
     // Animation lorsque la souris passe sur le ballon
     const handleMouseEnter = () => {
 
       // Déplace légèrement le ballon
       gsap.to(basketball.position, {
         x: startX - 0.05,
+        y: startY +0.04,
         duration: 0.6,
         ease: "power2.out",
       });
@@ -48,6 +52,7 @@ export default function Basketball({ scene }: BasketballProps) {
       // Replace le ballon à sa position d'origine
       gsap.to(basketball.position, {
         x: startX,
+        y: startY,
         duration: 0.6,
         ease: "power2.out",
       });
