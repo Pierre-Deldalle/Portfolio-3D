@@ -17,3 +17,15 @@ body {
 canvas {
   display: block;
 }
+
+body,
+canvas {
+  cursor: url("/cursors/cursor-gray.png") 4 4, auto;
+}
+
+a,
+button,
+[role="button"],
+.clickable {
+  cursor: url("/cursors/pointer-gray.png") 8 2, pointer;
+}
