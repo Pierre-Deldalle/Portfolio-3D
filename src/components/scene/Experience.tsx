@@ -6,11 +6,16 @@ import Chair from "./Chair";
 type ExperienceProps = {
   started: boolean;
   onStart: () => void;
+  selectedSection: string | null;
+  onSelectSection: (section: string) => void;
 };
 
-export default function Experience({ onStart, started }: ExperienceProps) {
-
-  // Contient les principaux éléments de la scène 3D
+export default function Experience({
+  onStart,
+  started,
+  selectedSection,
+  onSelectSection,
+}: ExperienceProps) {
   return (
     <>
       <ambientLight intensity={1.2} />
@@ -24,7 +29,10 @@ export default function Experience({ onStart, started }: ExperienceProps) {
         shadow-mapSize-height={2048}
       />
 
-      <Desk onClick={onStart} />
+      <Desk
+        onClick={onStart}
+        onSelectSection={onSelectSection}
+      />
 
       <Chair started={started} />
 
@@ -45,23 +53,25 @@ export default function Experience({ onStart, started }: ExperienceProps) {
         <meshStandardMaterial color="#e8e3db" />
       </mesh>
 
-      <mesh
-        position={[1.4, 1.4, -2.98]}
-      >
+      <mesh position={[1.4, 1.4, -2.98]}>
         <planeGeometry args={[0.75, 1]} />
         <meshStandardMaterial color="#3b5b92" />
       </mesh>
 
-      <mesh
-        position={[-1.7, 1.2, -2.98]}
-      >
+      <mesh position={[-1.7, 1.2, -2.98]}>
         <planeGeometry args={[1, 0.75]} />
         <meshStandardMaterial color="#3b5b92" />
       </mesh>
 
-      <CameraController started={started} />
+      <CameraController
+        started={started}
+        selectedSection={selectedSection}
+      />
 
-      <OrbitControls target={[0, 0.7, 0]} />
+      <OrbitControls
+        target={[0, 0.7, 0]}
+        enabled={!selectedSection}
+      />
     </>
   );
 }

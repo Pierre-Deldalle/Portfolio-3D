@@ -1,19 +1,23 @@
-    import { useEffect } from "react";
-    import * as THREE from "three";
-    import gsap from "gsap";
+import { useEffect } from "react";
+import * as THREE from "three";
+import gsap from "gsap";
 
-    type BooksProps = {
-    scene: THREE.Group;
-    };
+type BooksProps = {
+  scene: THREE.Group;
+  onSelectSection: (section: string) => void;
+};
 
-    export default function Books({ scene }: BooksProps) {
-    useEffect(() => {
+export default function Books({
+  scene,
+  onSelectSection,
+}: BooksProps) {
+  useEffect(() => {
     // Récupère la pile de livres
     const books = scene.getObjectByName("LIVRE");
 
     if (!books) {
-        console.warn("LIVRE introuvable dans le GLB");
-        return;
+      console.warn("LIVRE introuvable dans le GLB");
+      return;
     }
 
     // Récupère le canvas Three.js
@@ -24,91 +28,104 @@
 
     // Parcourt tous les meshes qui composent les livres
     books.traverse((child) => {
-        if (!(child instanceof THREE.Mesh)) {
+      if (!(child instanceof THREE.Mesh)) {
         return;
-        }
+      }
 
-        // Crée un matériau uniquement pour le contour
-        const outlineMaterial = new THREE.MeshBasicMaterial({
+      // Crée un matériau uniquement pour le contour
+      const outlineMaterial = new THREE.MeshBasicMaterial({
         color: "#ffffff",
         side: THREE.BackSide,
         transparent: true,
         opacity: 0,
-        });
+      });
 
-        // Crée une copie du mesh
-        const outline = new THREE.Mesh(
+      // Crée une copie du mesh
+      const outline = new THREE.Mesh(
         child.geometry,
         outlineMaterial
-        );
+      );
 
-        // Agrandit légèrement la copie
-    outline.scale.set(1.08, 1.08, 1.08);
+      // Le contour est purement visuel
+      // Il ne doit pas bloquer les clics
+      outline.raycast = () => {};
 
-        // Reprend la transformation du mesh original
-        outline.position.copy(child.position);
-        outline.rotation.copy(child.rotation);
-        outline.quaternion.copy(child.quaternion);
+      // Agrandit légèrement la copie
+      outline.scale.set(1.08, 1.08, 1.08);
 
-        // Ajoute le contour au même parent que le mesh original
-        child.parent?.add(outline);
+      // Reprend la transformation du mesh original
+      outline.position.copy(child.position);
+      outline.rotation.copy(child.rotation);
+      outline.quaternion.copy(child.quaternion);
 
-        outlines.push(outline);
+      // Ajoute le contour au même parent que le mesh original
+      child.parent?.add(outline);
+
+      outlines.push(outline);
     });
 
     // Lorsque la souris passe sur les livres
     const handleMouseEnter = () => {
-        if (canvas) {
+      if (canvas) {
         canvas.style.cursor =
-            'url("/cursors/pointer-gray.png") 8 2, pointer';
-        }
+          'url("/cursors/pointer-gray.png") 8 2, pointer';
+      }
 
-        // Fait apparaître progressivement le contour
-        outlines.forEach((outline) => {
-        const material = outline.material as THREE.MeshBasicMaterial;
+      outlines.forEach((outline) => {
+        const material =
+          outline.material as THREE.MeshBasicMaterial;
 
         gsap.to(material, {
-            opacity: 1,
-            duration: 0.25,
-            ease: "power2.out",
+          opacity: 1,
+          duration: 0.25,
+          ease: "power2.out",
         });
-        });
+      });
     };
 
     // Lorsque la souris quitte les livres
     const handleMouseLeave = () => {
-        if (canvas) {
+      if (canvas) {
         canvas.style.cursor =
-            'url("/cursors/cursor-gray.png") 4 4, auto';
-        }
+          'url("/cursors/cursor-gray.png") 4 4, auto';
+      }
 
-        // Fait disparaître progressivement le contour
-        outlines.forEach((outline) => {
-        const material = outline.material as THREE.MeshBasicMaterial;
+      outlines.forEach((outline) => {
+        const material =
+          outline.material as THREE.MeshBasicMaterial;
 
         gsap.to(material, {
-            opacity: 0,
-            duration: 0.25,
-            ease: "power2.out",
+          opacity: 0,
+          duration: 0.25,
+          ease: "power2.out",
         });
-        });
+      });
+    };
+
+    // Lorsque l'utilisateur clique sur les livres
+    const handleClick = () => {
+      console.log("📚 Clic sur LIVRE");
+
+      onSelectSection("studies");
     };
 
     // Rend les livres interactifs
     books.userData.handleMouseEnter = handleMouseEnter;
     books.userData.handleMouseLeave = handleMouseLeave;
+    books.userData.handleClick = handleClick;
 
-    // Nettoyage lorsque le composant est démonté
+    // Nettoyage
     return () => {
-        outlines.forEach((outline) => {
+      outlines.forEach((outline) => {
         outline.parent?.remove(outline);
 
-        const material = outline.material as THREE.MeshBasicMaterial;
-        material.dispose();
-        });
-    };
-    }, [scene]);
+        const material =
+          outline.material as THREE.MeshBasicMaterial;
 
-    // Les livres sont déjà affichés dans Desk.tsx
-    return null;
-    }
+        material.dispose();
+      });
+    };
+  }, [scene, onSelectSection]);
+
+  return null;
+}

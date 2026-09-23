@@ -7,9 +7,13 @@ import Books from "../interactives/Books";
 
 type DeskProps = {
   onClick: () => void;
+  onSelectSection: (section: string) => void;
 };
 
-export default function Desk({ onClick }: DeskProps) {
+export default function Desk({
+  onClick,
+  onSelectSection,
+}: DeskProps) {
   // Charge le modèle 3D complet du bureau
   const { scene } = useGLTF("/models/desk.glb");
 
@@ -23,7 +27,7 @@ export default function Desk({ onClick }: DeskProps) {
     });
   }, [scene]);
 
-  // Remonte les parents de l'objet survolé
+  // Remonte les parents de l'objet
   // jusqu'à trouver un objet interactif
   const findInteractiveObject = (object: THREE.Object3D) => {
     let current: THREE.Object3D | null = object;
@@ -31,7 +35,8 @@ export default function Desk({ onClick }: DeskProps) {
     while (current) {
       if (
         current.userData.handleMouseEnter ||
-        current.userData.handleMouseLeave
+        current.userData.handleMouseLeave ||
+        current.userData.handleClick
       ) {
         return current;
       }
@@ -51,21 +56,49 @@ export default function Desk({ onClick }: DeskProps) {
         rotation={[0, Math.PI, 0]}
         scale={1.4}
 
-        // Démarre l'expérience lorsque l'utilisateur clique sur le bureau
-        onClick={onClick}
+        // Détecte le clic sur le bureau ou un objet interactif
+        onClick={(event: ThreeEvent<MouseEvent>) => {
+          console.log(
+            "🖱️ Clic détecté sur :",
+            event.object.name
+          );
 
-        // Détecte le passage de la souris sur un objet du bureau
+          const interactiveObject =
+            findInteractiveObject(event.object);
+
+          console.log(
+            "Objet interactif trouvé :",
+            interactiveObject?.name
+          );
+
+          // Si l'objet possède une action au clic
+          if (interactiveObject?.userData.handleClick) {
+            event.stopPropagation();
+
+            console.log("✅ handleClick lancé");
+
+            interactiveObject.userData.handleClick();
+            return;
+          }
+
+          // Sinon, démarre simplement l'expérience
+          onClick();
+        }}
+
+        // Détecte le passage de la souris sur un objet interactif
         onPointerOver={(event: ThreeEvent<PointerEvent>) => {
-          const interactiveObject = findInteractiveObject(event.object);
+          const interactiveObject =
+            findInteractiveObject(event.object);
 
           if (interactiveObject) {
             interactiveObject.userData.handleMouseEnter?.();
           }
         }}
 
-        // Détecte lorsque la souris quitte un objet du bureau
+        // Détecte lorsque la souris quitte un objet interactif
         onPointerOut={(event: ThreeEvent<PointerEvent>) => {
-          const interactiveObject = findInteractiveObject(event.object);
+          const interactiveObject =
+            findInteractiveObject(event.object);
 
           if (interactiveObject) {
             interactiveObject.userData.handleMouseLeave?.();
@@ -77,7 +110,10 @@ export default function Desk({ onClick }: DeskProps) {
       <Basketball scene={scene} />
 
       {/* Ajoute les interactions des livres */}
-      <Books scene={scene} />
+      <Books
+        scene={scene}
+        onSelectSection={onSelectSection}
+      />
     </>
   );
 }

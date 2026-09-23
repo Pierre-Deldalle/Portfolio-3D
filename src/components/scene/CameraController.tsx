@@ -1,36 +1,94 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useThree } from "@react-three/fiber";
 import gsap from "gsap";
 
 type CameraControllerProps = {
   started: boolean;
+  selectedSection: string | null;
 };
 
 export default function CameraController({
   started,
+  selectedSection,
 }: CameraControllerProps) {
-
-  // Récupère la caméra utilisée dans la scène Three.js
   const { camera } = useThree();
 
-  useEffect(() => {
+  // Stocke en permanence l'endroit regardé par la caméra
+  const lookAtTarget = useRef({
+    x: 0,
+    y: 0.7,
+    z: 0,
+  });
 
-    // Ne lance pas le travelling tant que l'utilisateur n'a pas démarré l'expérience
+  useEffect(() => {
     if (!started) return;
 
-    // Anime la position de la caméra vers le bureau
-    gsap.to(camera.position, {
-      x: 0,
-      y: 1,
-      z: 2,
+    // =========================
+    // VUE PRINCIPALE DU BUREAU
+    // =========================
 
-      // Durée et fluidité du travelling
-      duration: 2,
-      ease: "power2.inOut",
-    });
+    if (!selectedSection) {
+      // Déplace la caméra
+      gsap.to(camera.position, {
+        x: 0,
+        y: 1,
+        z: 2,
+        duration: 1.4,
+        ease: "power2.inOut",
+      });
 
-  }, [started, camera]);
+      // Anime progressivement la direction du regard
+      gsap.to(lookAtTarget.current, {
+        x: 0,
+        y: 0.7,
+        z: 0,
+        duration: 1.4,
+        ease: "power2.inOut",
 
-  // Ce composant gère uniquement le comportement de la caméra
+        onUpdate: () => {
+          camera.lookAt(
+            lookAtTarget.current.x,
+            lookAtTarget.current.y,
+            lookAtTarget.current.z
+          );
+        },
+      });
+
+      return;
+    }
+
+    // =========================
+    // SECTION ÉTUDES
+    // =========================
+
+    if (selectedSection === "studies") {
+      // Déplace la caméra vers les livres
+      gsap.to(camera.position, {
+        x: 1.05,
+        y: 1.25,
+        z: -0.3,
+        duration: 1.4,
+        ease: "power2.inOut",
+      });
+
+      // Déplace progressivement le point regardé
+      gsap.to(lookAtTarget.current, {
+        x: -3.5,
+        y: 0.75,
+        z: -1.95,
+        duration: 1.4,
+        ease: "power2.inOut",
+
+        onUpdate: () => {
+          camera.lookAt(
+            lookAtTarget.current.x,
+            lookAtTarget.current.y,
+            lookAtTarget.current.z
+          );
+        },
+      });
+    }
+  }, [started, selectedSection, camera]);
+
   return null;
 }

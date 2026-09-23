@@ -7,9 +7,11 @@ import Loader from "./ui/Loader";
 import Credits from "./ui/Credits";
 
 export default function Portfolio() {
-
   // Indique si l'utilisateur a commencé l'expérience
   const [started, setStarted] = useState(false);
+
+  // Stocke la section actuellement sélectionnée
+  const [selectedSection, setSelectedSection] = useState<string | null>(null);
 
   // Gère l'ouverture et la fermeture du panneau des crédits
   const [creditsOpen, setCreditsOpen] = useState(false);
@@ -28,6 +30,8 @@ export default function Portfolio() {
         <Experience
           started={started}
           onStart={() => setStarted(true)}
+          selectedSection={selectedSection}
+          onSelectSection={setSelectedSection}
         />
       </Canvas>
 
