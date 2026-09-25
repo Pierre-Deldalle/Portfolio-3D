@@ -22,7 +22,7 @@ export default function Portfolio() {
       <Canvas
         shadows
         camera={{
-          position: [-6, 2, 3],
+          position: [-6, 2, 4],
           fov: 45,
         }}
       >

@@ -63,27 +63,6 @@ export default function Credits({
             </p>
           </section>
 
-          {/* Technologies utilisées */}
-          <section>
-            <span className="credits__category">
-              TECHNOLOGIES
-            </span>
-
-            <p>
-              React : Architecture et gestion des composants
-              <br />
-              TypeScript : Développement et structuration du code
-              <br />
-              Three.js : Rendu et gestion des éléments 3D
-              <br />
-              React Three Fiber : Permet d'utiliser Three.js dans un site React
-              <br />
-               Drei: Composants et utilitaires pour React Three Fiber
-               <br />
-               GSAP: Animations et transitions avec des caméras
-            </p>
-          </section>
-
           {/* Sources des modèles 3D */}
           <section>
             <span className="credits__category">
