@@ -3,9 +3,11 @@ import "./Intro.css";
 type IntroProps = {
   started: boolean;
   onOpenCredits: () => void;
+  isNight: boolean;
+  onToggleTheme: () => void;
 };
 
-export default function Intro({ started, onOpenCredits }: IntroProps) {
+export default function Intro({ started, onOpenCredits, isNight, onToggleTheme }: IntroProps) {
   return (
 
     // Cache progressivement l'introduction lorsque l'expérience commence
@@ -35,6 +37,20 @@ export default function Intro({ started, onOpenCredits }: IntroProps) {
       <div className="intro__explore">
         <span>Cliquez sur le bureau pour explorer</span>
       </div>
+              <button
+        className="theme-button"
+        onClick={onToggleTheme}
+        aria-label={isNight ? "Passer en mode jour" : "Passer en mode nuit"}
+        >
+        <img
+          src={
+            isNight
+              ? "/Icons/icon_theme_soleil.webp"
+              : "/Icons/icon_theme_sombre.webp"
+          }
+          alt=""
+        />
+      </button>
 
       {/* Pied de page */}
       <footer className="intro__footer">

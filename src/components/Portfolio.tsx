@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 
 import Experience from "./scene/Experience";
+import DayNight from "./scene/DayNight";
+
 import Intro from "./ui/Intro";
 import Loader from "./ui/Loader";
 import Credits from "./ui/Credits";
@@ -16,6 +18,9 @@ export default function Portfolio() {
   // Gère l'ouverture et la fermeture du panneau des crédits
   const [creditsOpen, setCreditsOpen] = useState(false);
 
+  // Indique si la scène est en mode nuit
+  const [isNight, setIsNight] = useState(false);
+
   return (
     <>
       {/* Canvas contenant toute la scène 3D */}
@@ -26,6 +31,9 @@ export default function Portfolio() {
           fov: 45,
         }}
       >
+        {/* Gère l'ambiance jour/nuit */}
+        <DayNight isNight={isNight} />
+
         {/* Scène principale du portfolio */}
         <Experience
           started={started}
@@ -39,6 +47,8 @@ export default function Portfolio() {
       <Intro
         started={started}
         onOpenCredits={() => setCreditsOpen(true)}
+        isNight={isNight}
+        onToggleTheme={() => setIsNight((prev) => !prev)}
       />
 
       {/* Panneau des crédits */}

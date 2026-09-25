@@ -18,16 +18,6 @@ export default function Experience({
 }: ExperienceProps) {
   return (
     <>
-      <ambientLight intensity={1.2} />
-
-      <directionalLight
-        position={[4, 6, 4]}
-        intensity={2}
-        castShadow
-        shadow-bias={-0.0005}
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
-      />
 
       <Desk
         onClick={onStart}
