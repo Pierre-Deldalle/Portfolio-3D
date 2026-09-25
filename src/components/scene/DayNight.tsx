@@ -16,7 +16,7 @@ export default function DayNight({ isNight }: DayNightProps) {
   useEffect(() => {
     // Change la couleur du fond
     const targetBackground = new THREE.Color(
-      isNight ? "#101827" : "#e8e3db"
+      isNight ? "#182235" : "#e8e3db"
     );
 
     // Initialise le fond si nécessaire
@@ -33,26 +33,25 @@ export default function DayNight({ isNight }: DayNightProps) {
       ease: "power2.inOut",
     });
 
-    // Anime la lumière ambiante
+    // Garde la scène visible pendant la nuit
     if (ambientLightRef.current) {
       gsap.to(ambientLightRef.current, {
-        intensity: isNight ? 0.3 : 1.2,
+        intensity: isNight ? 0.7 : 1.2,
         duration: 1.5,
         ease: "power2.inOut",
       });
     }
 
-    // Anime la lumière principale
+    // Change la lumière principale
     if (directionalLightRef.current) {
       gsap.to(directionalLightRef.current, {
-        intensity: isNight ? 0.6 : 2,
+        intensity: isNight ? 0.9 : 2,
         duration: 1.5,
         ease: "power2.inOut",
       });
 
-      // Change la couleur de la lumière
       const targetColor = new THREE.Color(
-        isNight ? "#91a7ff" : "#ffffff"
+        isNight ? "#b8c8ff" : "#ffffff"
       );
 
       gsap.to(directionalLightRef.current.color, {

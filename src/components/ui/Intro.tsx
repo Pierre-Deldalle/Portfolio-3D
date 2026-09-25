@@ -46,7 +46,7 @@ export default function Intro({ started, onOpenCredits, isNight, onToggleTheme }
           src={
             isNight
               ? "/Icons/icon_theme_soleil.webp"
-              : "/Icons/icon_theme_sombre.webp"
+              : "/Icons/icon_theme_lune.png"
           }
           alt=""
         />

@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 
 import Experience from "./scene/Experience";
 import DayNight from "./scene/DayNight";
+import DeskLampLight from "./scene/DeskLampLight";
 
 import Intro from "./ui/Intro";
 import Loader from "./ui/Loader";
@@ -31,10 +32,9 @@ export default function Portfolio() {
           fov: 45,
         }}
       >
-        {/* Gère l'ambiance jour/nuit */}
         <DayNight isNight={isNight} />
+        <DeskLampLight isNight={isNight} />
 
-        {/* Scène principale du portfolio */}
         <Experience
           started={started}
           onStart={() => setStarted(true)}
